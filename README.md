@@ -45,7 +45,7 @@ Marquee and CPU memory map
 
 ## Build
 
-Use **zmac 1.3**. Linux packaging also uses Python 3. The assembler accepts the source's original syntax and generates the complete `$0000–$3FFF` image.
+Use **zmac 1.3**. The assembler accepts the source's original syntax and generates the complete `$0000–$3FFF` image.
 
 Linux:
 
@@ -98,6 +98,8 @@ A high-level word begins with `RST $08`. `_ENTER` saves the caller's `BC` on the
 | `$3EA7–$3FFE` | 172-entry token dispatch table |
 
 Inline operands are explicit data: token `$19` carries a byte, `$1B` carries a cell, `$1E/$1F` carry branch destinations, and `$2E` carries a counted string. Array and inline-base operations carry their base-address cells. The disassembly expresses these boundaries with `DB` and `DW` and identifies each token's destination.
+
+The counted-loop frame at IX holds index, limit and body IP (six bytes). `DO` ($0176) installs the frame, `LOOP` ($0191) repeats while the signed index is below the limit, and `I` ($01BF) copies the index. `SB!` ($021D) is the address-first byte store used by `BONE` ($112E) and `BZERO` ($1132). See the [TERSE glossary](docs/Extra%20Bases%20-%20TERSE%20Glossary.md) for contracts and source cross-references.
 
 Forty complete definitions are linked to their TERSE source blocks. These include `BONE`, `BZERO`, `WHBODDS`, runner-occupancy checks, event strings, continuation prompts, `INNODDS`, `RETPA`, and `SETTFPA`. The [ROM map](docs/extra_bases_rom_map.md) lists their addresses and source blocks.
 
