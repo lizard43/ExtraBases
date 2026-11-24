@@ -1,4 +1,4 @@
-<p align="right"><code>v20261124-0015</code></p>
+<p align="right"><code>v20261124-0016</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -528,7 +528,7 @@ Divide the preceding stack value by the top value.
 : / /MOD DROP ;
 ```
 
-The listed composition retains the lower result of /MOD. The July 1982 Gas Root host /MOD at $04C8 pushes HL (remainder) then DE (quotient), matching Coloring Book's ordering. The EB listing therefore cannot be treated as a verified quotient implementation for that host. The EB game token table has no identified standalone /MOD or / entry; the 1979 source binding remains to be established.
+**1979 host reference:** [14-Mar-79 TERSE, /MOD at $03E8](https://github.com/lizard43/dnaTERSE-WB/blob/feature/console-82-native-disk-v20261121-0001/src/z80-runtime/terse-1979.asm), header $03E1, division subroutine $040A. The primitive pops divisor into BC and dividend into HL, then pushes HL remainder followed by DE quotient. July 1982 Gas Root $04C8 and Coloring Book $2301 use the same ordering. The listed DROP composition retains the remainder, so it is not a quotient definition under these contracts. A quotient composition is `: / /MOD SWAP DROP ;`. The actual EB XC-specific binding is not established; the released game token table has no identified standalone /MOD or / entry.
 
 ---
 
@@ -4419,7 +4419,11 @@ Advance the IX loop index by a signed step; the listed sign test selects directi
 
 `( step -- ; R: frame -- frame | empty )`
 
-Increment consumed; IX loop frame updated or released
+Increment consumed; IX loop frame updated or released.
+
+**1979 host reference:** [14-Mar-79 TERSE, +LOOP at $0E79](https://github.com/lizard43/dnaTERSE-WB/blob/feature/console-82-native-disk-v20261121-0001/src/z80-runtime/terse-1979.asm), header $0E71. This version tests subtraction sign directly; the reconstructed blocks below and July 1982 host use sign XOR overflow.
+
+**Released EB ROM correspondence:** all four original 4096-byte ZIP members passed CRC32 verification; all 172 dispatch cells at $3EA7 were examined. The common signed-step entry prefix `E1 7C DD 5E 00 DD 56 01 19` has no match in the 16384-byte image. Consecutive index writes occur only at $017D and $0198 (DO and LOOP); consecutive index reads at $0191 and $01BF (LOOP and I). The released ROM has token $15 DO, $18 LOOP, and $16 I/R@; no corresponding standalone +LOOP entry was identified. The following source is a reconstruction, not a recovered ROM entry.
 
 The reconstructed source in blocks 276–277 tests the step sign and signed index-minus-limit relation. Nonnegative steps repeat while index < limit; negative steps repeat while index >= limit. PLBACK restores BC from IX+4/+5; PLDONE releases six bytes.
 
@@ -5573,7 +5577,7 @@ _LOOP:
             jp      (iy)                ; Return to TERSE inner interpreter
 ```
 
-**Used by:** <a href="#terse-word-2b-4c-4f-4f-50"><code>+LOOP</code></a>, <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
+**Used by:** <a href="#terse-word-44-57-41-49-54"><code>DWAIT</code></a>, <a href="#terse-word-46-49-45-4c-44-57-52-54"><code>FIELDWRT</code></a>, <a href="#terse-word-49-4e-53-57-41-49-54"><code>INSWAIT</code></a>, <a href="#terse-word-4c-53-45-54-54-46-43-4f-4f-52"><code>LSETTFCOOR</code></a>, <a href="#terse-word-4d-4c-49-4e-4e"><code>MLINN</code></a>, <a href="#terse-word-4e-50-4f-53-54"><code>NPOST</code></a>, <a href="#terse-word-4f-55-54-54-49-4d-45"><code>OUTTIME</code></a>, <a href="#terse-word-50-50-4f-53-54"><code>PPOST</code></a>, <a href="#terse-word-52-45-54-50-41"><code>RETPA</code></a>, <a href="#terse-word-54-57-41-49-54"><code>TWAIT</code></a>.
 
 ---
 
