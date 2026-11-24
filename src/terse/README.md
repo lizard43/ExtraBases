@@ -7086,7 +7086,7 @@ Bind counted strings and native loop primitives, then reconstruct +LOOP from the
 
 Finish reconstructed +LOOP and restore the source-loader radix.
 
-**Lines 0–3.** Use the saved sign/overflow-related tests to choose PLBACK or PLDONE; completion advances IX past the loop frame, while repetition loads the saved branch address into BC. Both return through NEXT.
+**Lines 0–3.** Use the saved sign/overflow tests: a nonnegative step repeats while the signed index is below the limit, a negative step repeats while it is at or above the limit. PLDONE releases six bytes from IX; PLBACK restores BC from IX+4/+5. Both return through NEXT.
 
 ```text
  0|( BB parameter control - reconstructed continuation )
