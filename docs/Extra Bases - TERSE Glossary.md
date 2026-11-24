@@ -1,4 +1,4 @@
-<p align="right"><code>v20261123-0021</code></p>
+<p align="right"><code>v20261124-0014</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -20,17 +20,17 @@
 <tr><td><strong>*</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2a" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Multiply two stack values.<br><code>(&nbsp;m&nbsp;n&nbsp;--&nbsp;product&nbsp;)</code></td></tr>
 <tr><td><strong>/</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Divide the preceding stack value by the top value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;quotient&nbsp;)</code></td></tr>
 <tr><td><strong>+</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Add two stack values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;sum&nbsp;)</code></td></tr>
-<tr><td><strong>&lt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare whether the preceding value is less than the top value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
+<tr><td><strong>&lt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3c" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare signed 16-bit cells; return 1 if a is less than b, otherwise 0.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
 <tr><td><strong>=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare two values for equality.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
-<tr><td><strong>&gt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare whether the preceding value is greater than the top value.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
+<tr><td><strong>&gt;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-3e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compare signed 16-bit cells; return 1 if a is greater than b, otherwise 0.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
 <tr><td><strong>0=</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-30-3d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Return a condition indicating zero.<br><code>(&nbsp;n&nbsp;--&nbsp;flag&nbsp;)</code></td></tr>
 <tr><td><strong>2DUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-32-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Duplicate the top two stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;b&nbsp;)</code></td></tr>
 <tr><td><strong>AND</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Bitwise AND of two values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code></td></tr>
-<tr><td><strong>ARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate/name an indexed cell array from a the size.<br><code>(&nbsp;size&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>ARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate a named array of 16-bit cells; executing the resulting word returns base plus twice the index.<br><code>(&nbsp;size&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>ASM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-53-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select the Z80 assembler vocabulary in the development host.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>B!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-21" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Store one byte.<br><code>(&nbsp;byte&nbsp;address&nbsp;--&nbsp;)</code></td></tr>
-<tr><td><strong>B@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch one byte.<br><code>(&nbsp;address&nbsp;--&nbsp;byte&nbsp;)</code></td></tr>
-<tr><td><strong>BARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate/name an indexed byte array from a the size.<br><code>(&nbsp;size&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>B@</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-40" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch one unsigned byte and zero-extend it to a 16-bit cell.<br><code>(&nbsp;address&nbsp;--&nbsp;byte&nbsp;)</code></td></tr>
+<tr><td><strong>BARRAY</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-52-52-41-59" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Allocate a named byte array; executing the resulting word returns base plus index.<br><code>(&nbsp;size&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>BEGIN</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-45-47-49-4e" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that records a loop's object address.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>CODE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-44-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Declare a target/native word; with a temporary ROMHERE assignment it binds a name to an existing kernel entry.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>CONSTANT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-43-4f-4e-53-54-41-4e-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Define a constant from a value.<br><code>(&nbsp;value&nbsp;--&nbsp;)</code></td></tr>
@@ -42,10 +42,10 @@
 <tr><td><strong>HERE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-45-52-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Return the address of the next free dictionary location.<br><code>(&nbsp;--&nbsp;address&nbsp;)</code></td></tr>
 <tr><td><strong>HEX</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-48-45-58" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Select radix sixteen for parsing subsequent source numbers.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>IF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Immediate XC wrapper that emits a conditional target branch through XC-IF.<br><code>(&nbsp;flag&nbsp;--&nbsp;)</code></td></tr>
-<tr><td><strong>INP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Read an 8-bit input-port value and push it zero-extended.<br><code>(&nbsp;port&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
-<tr><td><strong>LIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Compiler literal mechanism used by INEXT's host macro.<br><code>(&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
+<tr><td><strong>INP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-4e-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Read an unsigned byte using the full 16-bit BC hardware port address; zero-extend the result.<br><code>(&nbsp;port&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
+<tr><td><strong>LIT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-49-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Fetch the next inline little-endian cell through BC and push it as a 16-bit literal.<br><code>(&nbsp;--&nbsp;value&nbsp;)</code></td></tr>
 <tr><td><strong>OR</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Bitwise inclusive OR of two values.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;result&nbsp;)</code></td></tr>
-<tr><td><strong>OUTP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write the low byte of a value to a hardware output port.<br><code>(&nbsp;value&nbsp;port&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>OUTP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-55-54-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Write the low byte of a value using the full 16-bit BC port address.<br><code>(&nbsp;value&nbsp;port&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>OVER</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4f-56-45-52" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Copy the second stack cell to the top.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;a&nbsp;b&nbsp;a&nbsp;)</code></td></tr>
 <tr><td><strong>ROT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-52-4f-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Rotate the top three stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;c&nbsp;--&nbsp;b&nbsp;c&nbsp;a&nbsp;)</code></td></tr>
 <tr><td><strong>SWAP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-53-57-41-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Exchange the top two stack cells.<br><code>(&nbsp;a&nbsp;b&nbsp;--&nbsp;b&nbsp;a&nbsp;)</code></td></tr>
@@ -269,7 +269,7 @@
 
 <table>
 <tbody>
-<tr><td><strong>+LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Uses LOOP to process game state.<br><code>(&nbsp;increment&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>+LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-2b-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Advance the IX loop index by a signed step; the listed sign test selects directional termination.<br><code>(&nbsp;step&nbsp;--&nbsp;;&nbsp;R:&nbsp;frame&nbsp;--&nbsp;frame&nbsp;|&nbsp;empty&nbsp;)</code></td></tr>
 <tr><td><strong>ALLFLDACT</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4c-4c-46-4c-44-41-43-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Sets all fielders active.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>ANMSEQLOAD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-41-4e-4d-53-45-51-4c-4f-41-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Finds proper anm seq by per=#.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>BALLERASE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-42-41-4c-4c-45-52-41-53-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Preserves BC/IY around native BLERASE and returns to TERSE.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
@@ -295,7 +295,7 @@
 <tr><td><strong>DEACTIVATE</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-45-41-43-54-49-56-41-54-45" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reset active bit in status.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>DI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Disable maskable Z80 interrupts.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>DIVHLBY4</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-49-56-48-4c-42-59-34" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Divide HL by 4.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
-<tr><td><strong>DO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Enter a counted loop using a three-cell return-stack frame.<br><code>(&nbsp;limit&nbsp;start&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>DO</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-4f" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Create a six-byte IX loop frame containing index, limit and body thread address.<br><code>(&nbsp;limit&nbsp;index&nbsp;--&nbsp;;&nbsp;R:&nbsp;--&nbsp;loop-frame&nbsp;)</code></td></tr>
 <tr><td><strong>DSTCALC</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-53-54-43-41-4c-43" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Calc deltas to destination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>DSTLD</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-44-53-54-4c-44" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Reads VDSTX and VDSTY low/high bytes into HL and DE and returns natively.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>EI</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-45-49" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Enable maskable Z80 interrupts.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
@@ -316,7 +316,7 @@
 <tr><td><strong>ISTART</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-49-53-54-41-52-54" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Disables interrupts, pops a schedule pointer into IPNT, programs INMOD/INFBK and the Z80 I register, selects IM 2 and re-enables interrupts before NEXT.<br><code>(&nbsp;interrupt-address&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>KILLOF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4b-49-4c-4c-4f-46" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Stop outfield tractor ball control.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>LOADANM</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-41-44-41-4e-4d" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Loads magic & anm HL-top of playact table.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
-<tr><td><strong>LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Advance a counted loop and test its termination.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
+<tr><td><strong>LOOP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4c-4f-4f-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Increment the loop index and repeat while it is signed less than the limit.<br><code>(&nbsp;--&nbsp;;&nbsp;R:&nbsp;frame&nbsp;--&nbsp;frame&nbsp;|&nbsp;empty&nbsp;)</code></td></tr>
 <tr><td><strong>MULTHLBY4</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-55-4c-54-48-4c-42-59-34" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Multiplies the magnitude of HL by four through shifts, then restores its sign.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>MUSCPU</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4d-55-53-43-50-55" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Declare cross-screen dispatch labels and begin assembling MUSCPU.<br><code>(&nbsp;--&nbsp;)</code></td></tr>
 <tr><td><strong>NDUP</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terse-word-4e-44-55-50" title="View implementation"><img src="images/terse-word-link.svg" width="14" height="14" alt="Implementation" /></a><br>Duplicate the top n parameter-stack cells.<br><code>(&nbsp;x1&nbsp;…&nbsp;xn&nbsp;n&nbsp;--&nbsp;x1&nbsp;…&nbsp;xn&nbsp;x1&nbsp;…&nbsp;xn&nbsp;)</code></td></tr>
@@ -528,6 +528,8 @@ Divide the preceding stack value by the top value.
 : / /MOD DROP ;
 ```
 
+The composition retains the lower result of /MOD. Coloring Book retains the upper result using SWAP DROP; the EB /MOD implementation and result ordering require direct source verification before equating the two contracts.
+
 ---
 
 ### <a name="terse-word-2b"></a><span>+</span>
@@ -549,7 +551,7 @@ _plus:
 
 ### <a name="terse-word-3c"></a><span>&lt;</span>
 
-Compare whether the preceding value is less than the top value.
+Compare signed 16-bit cells; return 1 if a is less than b, otherwise 0.
 
 `( a b -- flag )`
 
@@ -595,14 +597,14 @@ _equal:
 
 ### <a name="terse-word-3e"></a><span>&gt;</span>
 
-Compare whether the preceding value is greater than the top value.
+Compare signed 16-bit cells; return 1 if a is greater than b, otherwise 0.
 
 `( a b -- flag )`
 
 ```z80
 _gt:
-            pop     hl                  ; Pop first operand (m)
-            pop     de                  ; Pop second operand (n)
+            pop     hl                  ; Pop second operand (n)
+            pop     de                  ; Pop first operand (m)
             jp      $0116               ; Jump into signed less-than evaluation
 ```
 
@@ -667,7 +669,7 @@ _AND:
 
 ### <a name="terse-word-41-52-52-41-59"></a><span>ARRAY</span>
 
-Allocate/name an indexed cell array from a the size.
+Allocate a named array of 16-bit cells; executing the resulting word returns base plus twice the index.
 
 `( size -- )`
 
@@ -720,7 +722,7 @@ _Bbang:
 
 ### <a name="terse-word-42-40"></a><span>B@</span>
 
-Fetch one byte.
+Fetch one unsigned byte and zero-extend it to a 16-bit cell.
 
 `( address -- byte )`
 
@@ -739,7 +741,7 @@ _Bat:
 
 ### <a name="terse-word-42-41-52-52-41-59"></a><span>BARRAY</span>
 
-Create a named array of size uninitialized bytes; indexing the resulting word returns the byte address.
+Allocate a named byte array; executing the resulting word returns base plus index.
 
 `( size -- )`
 
@@ -941,7 +943,7 @@ Immediate XC wrapper that emits a conditional target branch through XC-IF.
 
 ### <a name="terse-word-49-4e-50"></a><span>INP</span>
 
-Read an 8-bit input-port value and push it zero-extended.
+Read an unsigned byte using the full 16-bit BC hardware port address; zero-extend the result.
 
 `( port -- value )`
 
@@ -960,7 +962,7 @@ _INP:
 
 ### <a name="terse-word-4c-49-54"></a><span>LIT</span>
 
-Fetch the next inline dictionary cell and push it as a 16-bit literal.
+Fetch the next inline little-endian cell through BC and push it as a 16-bit literal.
 
 `( -- value )`
 
@@ -1004,7 +1006,7 @@ _OR:
 
 ### <a name="terse-word-4f-55-54-50"></a><span>OUTP</span>
 
-Write the low byte of a value to a hardware output port.
+Write the low byte of a value using the full 16-bit BC port address.
 
 `( value port -- )`
 
@@ -4413,11 +4415,13 @@ Clears $270 bytes starting at $7C30 and resets OFTFCNT.
 
 ### <a name="terse-word-2b-4c-4f-4f-50"></a><span>+LOOP</span>
 
-Uses LOOP to process game state.
+Advance the IX loop index by a signed step; the listed sign test selects directional termination.
 
-`( increment -- )`
+`( step -- ; R: frame -- frame | empty )`
 
 Increment consumed; IX loop frame updated or released
+
+The listed source tests the sign of the step and the signed index-minus-limit relation. The excerpt ends before the complete back-edge; a separate call to LOOP is not established by this listing.
 
 ```text
 CODE +LOOP <ASSEMBLE H POP, H A MOV, 0 X E LDX, 1 X D LDX,
@@ -4429,8 +4433,6 @@ PSW PUSH, H POP, 7 A BIT, L A MOV, PLPOS JZ,
 LABEL PLPOS 84 ANI, PLBACK JPO,
 LABEL PLDONE 6 D LXI, D DADX, NEXT
 ```
-
-**Calls:** <a href="#terse-word-4c-4f-4f-50"><code>LOOP</code></a>.
 
 ---
 
@@ -5054,9 +5056,9 @@ PSW POP, ' COMPHL CNZ, RET,
 
 ### <a name="terse-word-44-4f"></a><span>DO</span>
 
-Enter a counted loop using a three-cell return-stack frame.
+Create a six-byte IX loop frame containing index, limit and body thread address.
 
-`( limit start -- )`
+`( limit index -- ; R: -- loop-frame )`
 
 Two parameter-stack cells consumed; IX return stack holds start, limit and loop IP
 
@@ -5540,9 +5542,9 @@ H POP, ( pc ) H INX, RET, ( returns updated pc in HL )
 
 ### <a name="terse-word-4c-4f-4f-50"></a><span>LOOP</span>
 
-Advance a counted loop and test its termination.
+Increment the loop index and repeat while it is signed less than the limit.
 
-`( -- )`
+`( -- ; R: frame -- frame | empty )`
 
 Parameter stack unchanged; IX loop index incremented, loop frame retained or released
 
@@ -5561,7 +5563,7 @@ _LOOP:
             pop     hl                  ; Move flags into HL
             ld      a,l                 ; Extract status flags byte
             and     $84                 ; Mask Sign (bit 7) and Overflow (bit 2) flags
-            jp      po,$01B7            ; If sign matches overflow, loop continues
+            jp      po,$01B7            ; If sign differs from overflow, loop continues
             ld      de,$0006            ; Loop complete: deallocate 3-word loop frame
             add     ix,de               ; Advance Return Stack Pointer (IX)
             jp      $01BD               ; Jump to exit loop and return to interpreter
