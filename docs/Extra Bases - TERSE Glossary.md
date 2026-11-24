@@ -1,4 +1,4 @@
-<p align="right"><code>v20261124-0014</code></p>
+<p align="right"><code>v20261124-0015</code></p>
 
 # Extra Bases - TERSE Glossary
 
@@ -528,7 +528,7 @@ Divide the preceding stack value by the top value.
 : / /MOD DROP ;
 ```
 
-The composition retains the lower result of /MOD. Coloring Book retains the upper result using SWAP DROP; the EB /MOD implementation and result ordering require direct source verification before equating the two contracts.
+The listed composition retains the lower result of /MOD. The July 1982 Gas Root host /MOD at $04C8 pushes HL (remainder) then DE (quotient), matching Coloring Book's ordering. The EB listing therefore cannot be treated as a verified quotient implementation for that host. The EB game token table has no identified standalone /MOD or / entry; the 1979 source binding remains to be established.
 
 ---
 
@@ -4421,7 +4421,7 @@ Advance the IX loop index by a signed step; the listed sign test selects directi
 
 Increment consumed; IX loop frame updated or released
 
-The listed source tests the sign of the step and the signed index-minus-limit relation. The excerpt ends before the complete back-edge; a separate call to LOOP is not established by this listing.
+The reconstructed source in blocks 276–277 tests the step sign and signed index-minus-limit relation. Nonnegative steps repeat while index < limit; negative steps repeat while index >= limit. PLBACK restores BC from IX+4/+5; PLDONE releases six bytes.
 
 ```text
 CODE +LOOP <ASSEMBLE H POP, H A MOV, 0 X E LDX, 1 X D LDX,
@@ -4432,6 +4432,7 @@ PSW PUSH, H POP, 7 A BIT, L A MOV, PLPOS JZ,
 ( BB parameter control - reconstructed continuation )
 LABEL PLPOS 84 ANI, PLBACK JPO,
 LABEL PLDONE 6 D LXI, D DADX, NEXT
+LABEL PLBACK 4 X C LDX, 5 X B LDX, NEXT ASSEMBLE>
 ```
 
 ---
