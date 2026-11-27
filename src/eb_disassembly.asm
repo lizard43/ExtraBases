@@ -83,7 +83,7 @@ _RETURN:
             jp      (iy)                ; Return to TERSE inner interpreter
 
 ;=========================================================================================
-; ----> LITERAL        16-BIT INLINE LITERAL  ($0046 - $004E)
+; ----> LIT            16-BIT INLINE LITERAL  ($0046 - $004E)
 ;   Reads a 16-bit word from the TERSE instruction stream and pushes it
 ;   onto the parameter stack. (Opcode: $1B)
 ;=========================================================================================
@@ -126,7 +126,7 @@ _DLIT:
             jp      _LITERAL               ; Jump to _LITERAL to fetch/push second word
 
 ;=========================================================================================
-; ----> +!             ADD INLINE OFFSET TO STACK WORD  ($0061 - $006B)
+; ----> INLINE BASE    ADD INLINE OFFSET TO STACK WORD  ($0061 - $006B)
 ;   Pops a value from the Parameter Stack, reads a 16-bit inline offset from
 ;   the instruction stream, adds them together, and pushes the sum. (Opcode: $0E)
 ;=========================================================================================
@@ -263,7 +263,7 @@ _Bbang:
 ;=========================================================================================
 ; ----> ZERO           CLEAR 16-BIT WORD IN MEMORY  ($00AD - $00B4)
 ;   Pops a memory address from the Parameter Stack and clears the 16-bit word
-;   at that location to zero. (Opcode: $73)
+;   at that location to zero. (Opcode: $8D)
 ;=========================================================================================
 _ZERO:
             pop     hl                  ; Pop target memory address
@@ -287,7 +287,7 @@ _plus:
 ;=========================================================================================
 ; ----> -              16-BIT INTEGER SUBTRACTION  ($00BB - $00C2)
 ;   Pops two 16-bit values from the Parameter Stack, subtracts the top value
-;   from the second value, and pushes the result. (Opcode: $1F)
+;   from the second value, and pushes the result. (Opcode: $27)
 ;=========================================================================================
 _minus:
             pop     de                  ; Pop subtrahend from parameter stack
@@ -322,7 +322,7 @@ _1plus:
 ;=========================================================================================
 ; ----> 2+             ADD TWO TO TOP STACK ITEM  ($00CD - $00D2)
 ;   Pops the top 16-bit value from the Parameter Stack, increments it by 2,
-;   and pushes the result back onto the stack. (Opcode: $2A)
+;   and pushes the result back onto the stack. (Opcode: $3F)
 ;=========================================================================================
 _2plus:
             pop     hl                  ; Pop target value from parameter stack
@@ -334,7 +334,7 @@ _2plus:
 ;=========================================================================================
 ; ----> 2-             SUBTRACT TWO FROM TOP STACK ITEM  ($00D3 - $00D8)
 ;   Pops the top 16-bit value from the Parameter Stack, decrements it by 2,
-;   and pushes the result back onto the stack. (Opcode: $2B)
+;   and pushes the result back onto the stack. (Opcode: $3D)
 ;=========================================================================================
 _2minus:
             pop     hl                  ; Pop target value from parameter stack
@@ -357,7 +357,7 @@ _2star:
 ;=========================================================================================
 ; ----> 2/             DIVIDE TOP STACK ITEM BY TWO  ($00DE - $00E5)
 ;   Pops the top 16-bit signed integer from the Parameter Stack, shifts it right
-;   arithmetically by 1 bit, and pushes the quotient back onto the stack. (Opcode: $1A)
+;   arithmetically by 1 bit, and pushes the quotient back onto the stack. (Opcode: $59)
 ;=========================================================================================
 _2slash:
             pop     hl                  ; Pop target value from parameter stack
@@ -486,8 +486,8 @@ _gt:
 ;=========================================================================================
 ; ----> _greater_than  Native entry $013C
 ;=========================================================================================
-            pop     hl                  ; Pop first operand (m)
-            pop     de                  ; Pop second operand (n)
+            pop     hl                  ; Pop second operand (n)
+            pop     de                  ; Pop first operand (m)
             jp      $0116               ; Jump into signed less-than evaluation
 
 ;=========================================================================================
@@ -571,7 +571,9 @@ _XOR:
 ;=========================================================================================
 ; ----> DO             INITIALIZE COUNTED DO-LOOP  ($0176 - $0190)
 ;   Allocates a 3-word frame on the Return Stack (IX), pops initial index and limit
-;   from the Parameter Stack, and stores loop state and calling IP. (Opcode: $15)
+;   from the Parameter Stack, and stores loop state and body IP. (Opcode: $15)
+;   Stack: ( limit index -- ; R: -- loop-frame ); no initial limit test.
+;   IX+0 index, IX+2 limit, IX+4 body IP; each field is a 16-bit cell.
 ;=========================================================================================
 _DO:
             ld      de,$FFFA            ; Offset to allocate 3 words on Return Stack
@@ -589,7 +591,8 @@ _DO:
 ;=========================================================================================
 ; ----> LOOP           INCREMENT AND TEST DO-LOOP  ($0191 - $01BE)
 ;   Increments the innermost DO-loop index on the Return Stack by 1 and checks
-;   against the limit. Branches back to loop start or deallocates frame. (Opcode: $18)
+;   against the limit. Signed index < limit repeats; otherwise release six bytes.
+;   Stack: ( -- ; R: frame -- frame | empty ). (Opcode: $18)
 ;=========================================================================================
 _LOOP:
             ld      l,(ix+$00)          ; Read current loop index from Return Stack
@@ -605,7 +608,7 @@ _LOOP:
             pop     hl                  ; Move flags into HL
             ld      a,l                 ; Extract status flags byte
             and     $84                 ; Mask Sign (bit 7) and Overflow (bit 2) flags
-            jp      po,$01B7            ; If sign matches overflow, loop continues
+            jp      po,$01B7            ; If sign differs from overflow, loop continues
             ld      de,$0006            ; Loop complete: deallocate 3-word loop frame
             add     ix,de               ; Advance Return Stack Pointer (IX)
             jp      $01BD               ; Jump to exit loop and return to interpreter
@@ -613,7 +616,7 @@ _LOOP:
             ld      b,(ix+$05)
             jp      (iy)                ; Return to TERSE inner interpreter
 ;=========================================================================================
-; ----> R@             FETCH FROM RETURN STACK  ($01BF - $01C7)
+; ----> I / R@         FETCH FROM RETURN STACK  ($01BF - $01C7)
 ;   Copies the top 16-bit word from the Return Stack (IX) without popping it
 ;   and pushes the value onto the Parameter Stack. (Opcode: $16)
 ;=========================================================================================
@@ -656,9 +659,9 @@ _SWAB:
 ;=========================================================================================
 _OUTP:
             exx                         ; Save TERSE VM registers in alternate set
-            pop     bc                  ; Pop 16-bit port address (C=port, B=sub-port)
+            pop     bc                  ; Pop full 16-bit BC port address
             pop     hl                  ; Pop 16-bit value (L = 8-bit data byte)
-            out     (c),l               ; Output byte L to hardware port C
+            out     (c),l               ; Output byte L to hardware port BC
             exx                         ; Restore TERSE VM registers
             jp      (iy)                ; Return to TERSE inner interpreter
 
@@ -669,8 +672,8 @@ _OUTP:
 ;=========================================================================================
 _INP:
             exx                         ; Save TERSE VM registers in alternate set
-            pop     bc                  ; Pop 16-bit port address (C=port, B=sub-port)
-            in      l,(c)               ; Read byte from hardware port C into L
+            pop     bc                  ; Pop full 16-bit BC port address
+            in      l,(c)               ; Read byte from hardware port BC into L
             ld      h,$00               ; Zero-extend high byte
             push    hl                  ; Push 16-bit input value onto parameter stack
             exx                         ; Restore TERSE VM registers
@@ -3773,18 +3776,20 @@ PICO:
 
 ;=========================================================================================
 ; ----> _BONE  TERSE block 233; ROM $112E-$1131
+;   ( address -- )  1 SB! ; byte value 1, token $30.
 ;=========================================================================================
             rst     $08                 ; Enter the inline TERSE thread
             DB      $22                 ; $112F: 1
-            DB      $23                 ; $1130: _SBSTORE
+            DB      $23                 ; $1130: SB!
             DB      $03                 ; $1131: RETURN
 
 ;=========================================================================================
 ; ----> _BZERO  TERSE block 233; ROM $1132-$1135
+;   ( address -- )  0 SB! ; byte value 0, token $34.
 ;=========================================================================================
             rst     $08                 ; Enter the inline TERSE thread
             DB      $0D                 ; $1133: 0
-            DB      $23                 ; $1134: _SBSTORE
+            DB      $23                 ; $1134: SB!
             DB      $03                 ; $1135: RETURN
 
 ;=========================================================================================
@@ -11341,7 +11346,7 @@ OPTBL:
             DW      _SWABN              ; Token $20: SWAN
             DW      _dpost              ; Token $21: _dpost
             DW      _1                  ; Token $22: 1
-            DW      _SBSTORE            ; Token $23: _SBSTORE
+            DW      _SBSTORE            ; Token $23: SB! (address value -- )
             DW      _at                 ; Token $24: @
             DW      _EI                 ; Token $25: EI
             DW      _equal              ; Token $26: =

@@ -48,7 +48,7 @@ _greater_than       EQU     $013C
 _BMOVE              EQU     $0168
 _Aquote             EQU     $020E
 _SSTORE             EQU     $0219
-_SBSTORE            EQU     $021D
+_SBSTORE            EQU     $021D ; SB! ( address value -- )
 _ENDINT             EQU     $0221
 _FILL               EQU     $0253
 _RND                EQU     $0275
